@@ -15,7 +15,7 @@
         <div class="lg:w-2/5 md:w-2/5 sm:w-2/5 xl:w-2/5 2xl:w-2/5 w-full pt-3
                     lg:pt-0 md:pt-0 sm:pt-0 xl:pt-0 2xl:pt-0">
         <select v-model="selectedDog" name="chooseDogBreed " id="chooseDogBreed"
-                 class=" focus:placeholder-gray-600 block w-full px-3 py-2 rounded-lg shadow-sm
+                 class="overflow-hidden overflow-ellipsis focus:placeholder-gray-600 block w-full pl-3 py-2 -pr2 rounded-lg shadow-sm
                  focus:border-yellow-500 focus:outline-none focus:ring-1
                  focus:ring-yellow-500 "
                 :class="selectedDog ? 'border-yellow-500 ring-yellow-500 ring-1' : ''">

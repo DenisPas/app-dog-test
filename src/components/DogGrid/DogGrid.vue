@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white">
-    <div  class="max-w-2xl mx-auto 10 px-4 py-6 sm:py-10 sm:px-6 lg:max-w-7xl lg:px-8">
+    <div  class="max-w-2xl mx-auto 10 px-4 py-4 sm:py-6 sm:px-6 lg:max-w-7xl lg:px-8">
       <div
            class="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
         <a v-for="(dog, index) in dogs"

@@ -1,4 +1,4 @@
-# dog-app-test
+# app-dog-test
 
 ## Project setup
 ```
