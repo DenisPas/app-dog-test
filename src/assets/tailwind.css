@@ -1,0 +1,17 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+.button__favorite{
+    @apply absolute space-x-2 inline-flex
+    items-center rounded-xl font-bold py-1 px-4	button__position
+    transform -translate-x-full -translate-y-full
+}
+
+
+.button__position{
+    top: 97%;
+    left: 97%;
+}
