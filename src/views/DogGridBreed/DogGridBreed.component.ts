@@ -1,21 +1,19 @@
-import { Component, Vue } from 'vue-property-decorator';
+import { Component } from 'vue-property-decorator';
+import { mixins } from 'vue-class-component';
 
 import { dogsByBreed } from '@/services/services';
 import DogGrid from "@/components/DogGrid/DogGrid.vue";
 import {IDog} from "@/shared/model/dog.model";
+import DataUtils from '@/shared/data/data-utils.service';
 
 @Component({
   components: {
     DogGrid,
   },
 })
-export default class DogGridBreed extends Vue {
+export default class DogGridBreed extends  mixins(DataUtils) {
 
   public dogs: IDog[] = [];
-
-  public get favoriteDogs():IDog[] {
-      return this.$store.getters.favoriteDogs;
-  }
 
   public mounted(): void{
     if(this.$route.params.breed){
@@ -37,18 +35,7 @@ export default class DogGridBreed extends Vue {
   public loadDogsByBreed(breed:string): void {
     this.$store.commit('setIsLoading', true)
     dogsByBreed(breed).then((response: any) => {
-        const dogs = response.message;
-
-        dogs.forEach((link:string) => {
-          if((this.favoriteDogs.filter((e:IDog) => e.link === link).length > 0)){
-            this.dogs.push({ link, isFavorite: true })
-          }
-          else {
-            this.dogs.push({ link, isFavorite: false });
-          }
-        });
-        //@ts-ignore
-        this.dogs = Array.from(new Set(this.dogs.map(JSON.stringify))).map(JSON.parse);
+      this.dogs = this.filterDogs(response, this.dogs)
 
       this.$store.commit('setIsLoading', false)
     });

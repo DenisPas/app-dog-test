@@ -1,17 +1,14 @@
-import { Component, Vue} from 'vue-property-decorator';
+import { Component} from 'vue-property-decorator';
 import DogGrid from "@/components/DogGrid/DogGrid.vue";
-import {IDog} from "@/shared/model/dog.model";
+import {mixins} from "vue-class-component";
+import DataUtils from "@/shared/data/data-utils.service";
 
 @Component({
   components: {
     DogGrid,
   },
 })
-export default class Favorite extends Vue {
-
-  public get favoriteDogs():IDog[] {
-    return this.$store.getters.favoriteDogs;
-  }
+export default class Favorite extends mixins(DataUtils) {
 
   public mounted(): void {
     window.onscroll = () => {

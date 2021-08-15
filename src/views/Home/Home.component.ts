@@ -1,15 +1,17 @@
-import {Component, Vue, } from 'vue-property-decorator';
+import {Component } from 'vue-property-decorator';
 import DogGrid from '@/components/DogGrid/DogGrid.vue'
 
 import { allDog } from '@/services/services';
 import {IDog} from "@/shared/model/dog.model";
+import {mixins} from "vue-class-component";
+import DataUtils from "@/shared/data/data-utils.service";
 
 @Component({
   components: {
     DogGrid,
   },
 })
-export default class DogGridView extends Vue {
+export default class DogGridView extends mixins(DataUtils) {
 
   public dogs: IDog[] = [];
 
@@ -31,10 +33,7 @@ export default class DogGridView extends Vue {
   public loadDogs() {
     this.$store.commit('setIsLoading', true)
     allDog().then((response: any) => {
-        const dogs = response.message;
-        dogs.forEach((link:string) => {
-          this.dogs.push({ link, isFavorite: false });
-        });
+      this.dogs = this.filterDogs(response, this.dogs)
       this.$store.commit('setIsLoading', false);
       });
   }
